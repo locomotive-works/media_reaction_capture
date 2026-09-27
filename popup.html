@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Media Reaction Capture</h1>
+
+  <section id="idle">
+    <label for="title">セッション名（任意）</label>
+    <input id="title" type="text" placeholder="例: 映画リアクション">
+    <button id="start" class="primary">記録セッションを開始</button>
+  </section>
+
+  <section id="active" hidden>
+    <p class="status"><span class="dot"></span>記録中 ・ <span id="count">0</span> 件</p>
+    <p class="hint">動画・音声のあるページで <kbd>Space</kbd> を押すと一時停止してコメントを記録します。</p>
+    <ol id="entries"></ol>
+    <button id="stop" class="primary">終了して Markdown をダウンロード</button>
+    <button id="discard" class="secondary">破棄して終了</button>
+  </section>
+
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

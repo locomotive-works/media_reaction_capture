@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Media Reaction Capture",
+  "version": "0.1.0",
+  "description": "Press Space during a recording session to pause media and capture a timestamped comment. Export the session as Markdown.",
+  "permissions": ["storage", "downloads"],
+  "action": {
+    "default_title": "Media Reaction Capture",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["shared.js", "content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
