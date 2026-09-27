@@ -53,9 +53,17 @@ Chrome 標準の [`chrome.i18n`](https://developer.chrome.com/docs/extensions/re
 
 配色は [Creator Transformation Railcar](https://github.com/locomotive-works) のブランドパレットに合わせています（primary `#7c3aed` / `#8b5cf6` → `#6d28d9` のグラデーション、slate 系のニュートラル）。アイコンの元データは `icons/icon.svg` です。
 
+## Chrome Web Store 向けのパッケージ
+
+```sh
+./scripts/package.sh   # → dist/media_reaction_capture-<version>.zip
+```
+
+ストア掲載用の文章・権限の説明・スクリーンショットは [`store/`](store/LISTING.md) にあります。
+
 ## 補足
 
-- 記録は `chrome.storage.local` にだけ保存され、外部には送信されません
+- 記録は `chrome.storage.local` にだけ保存され、外部には送信されません（[プライバシーポリシー](PRIVACY.md)）
 - iframe に埋め込まれたプレーヤーでは、プレーヤーをクリックしてフォーカスしてから Space を押してください
 - 動画要素そのものが全画面表示になっているサイトでは、コメント欄が見えないことがあります（YouTube などプレーヤー全体が全画面になるサイトでは表示されます）
 

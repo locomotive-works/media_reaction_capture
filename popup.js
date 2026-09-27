@@ -89,10 +89,11 @@ $("stop").addEventListener("click", async () => {
   const session = await getSession();
   if (!session) return;
   const markdown = toMarkdown(session, new Date());
-  await chrome.downloads.download({
-    url: "data:text/markdown;charset=utf-8," + encodeURIComponent(markdown),
-    filename: fileName(session),
-  });
+  // A plain <a download> avoids needing the "downloads" permission.
+  const url = URL.createObjectURL(new Blob([markdown], { type: "text/markdown;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: fileName(session) });
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
   await chrome.storage.local.remove(MRC_STORAGE_KEY);
 });
 
