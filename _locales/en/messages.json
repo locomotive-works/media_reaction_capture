@@ -1,0 +1,22 @@
+{
+  "extName": { "message": "Media Reaction Capture" },
+  "extDescription": { "message": "Press Space during a recording session to pause media and capture a timestamped comment. Export the session as Markdown." },
+  "popupSessionName": { "message": "Session name (optional)" },
+  "popupSessionPlaceholder": { "message": "e.g. Movie reactions" },
+  "popupStart": { "message": "Start recording session" },
+  "popupStatus": {
+    "message": "Recording · $COUNT$ captured",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "popupHint": { "message": "On a page with video or audio, press Space to pause and capture a comment." },
+  "popupStop": { "message": "End and download Markdown" },
+  "popupDiscard": { "message": "Discard session" },
+  "popupDiscardConfirm": { "message": "Click again to discard" },
+  "noComment": { "message": "(no comment)" },
+  "overlayLabel": { "message": "Capture a comment" },
+  "overlayPlaceholder": { "message": "Type a comment…" },
+  "overlayHint": { "message": "Enter: save & resume · Shift+Enter: new line · Esc: cancel" },
+  "mdStarted": { "message": "Started" },
+  "mdEnded": { "message": "Ended" },
+  "mdCount": { "message": "Captured" }
+}

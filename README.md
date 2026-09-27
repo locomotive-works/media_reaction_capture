@@ -38,6 +38,21 @@ YouTube ではタイムスタンプがその瞬間へのリンクになります
 2. `chrome://extensions` を開き、右上の **デベロッパーモード** をオンにする
 3. **パッケージ化されていない拡張機能を読み込む** からこのフォルダを選ぶ
 
+## 多言語対応 / i18n
+
+Chrome 標準の [`chrome.i18n`](https://developer.chrome.com/docs/extensions/reference/api/i18n) を使っています。ブラウザの表示言語に合わせて、UI・コメント欄・Markdown の見出しが切り替わります。
+
+| ロケール | ファイル |
+|---|---|
+| English（デフォルト） | `_locales/en/messages.json` |
+| 日本語 | `_locales/ja/messages.json` |
+
+言語を追加するときは、`_locales/<locale>/messages.json` を `en` と同じキーで作ってください。
+
+## デザイン
+
+配色は [Creator Transformation Railcar](https://github.com/locomotive-works) のブランドパレットに合わせています（primary `#7c3aed` / `#8b5cf6` → `#6d28d9` のグラデーション、slate 系のニュートラル）。アイコンの元データは `icons/icon.svg` です。
+
 ## 補足
 
 - 記録は `chrome.storage.local` にだけ保存され、外部には送信されません

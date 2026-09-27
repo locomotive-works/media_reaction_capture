@@ -9,3 +9,7 @@ function mrcFormatTime(totalSeconds) {
   const pad = (n) => String(n).padStart(2, "0");
   return h > 0 ? `${h}:${pad(m)}:${pad(sec)}` : `${pad(m)}:${pad(sec)}`;
 }
+
+function mrcT(key, substitutions) {
+  return chrome.i18n.getMessage(key, substitutions);
+}

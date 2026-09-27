@@ -1,0 +1,22 @@
+{
+  "extName": { "message": "Media Reaction Capture" },
+  "extDescription": { "message": "記録セッション中に Space を押すと、メディアを一時停止してタイムスタンプ付きのコメントを記録します。セッションは Markdown で書き出せます。" },
+  "popupSessionName": { "message": "セッション名（任意）" },
+  "popupSessionPlaceholder": { "message": "例: 映画リアクション" },
+  "popupStart": { "message": "記録セッションを開始" },
+  "popupStatus": {
+    "message": "記録中 ・ $COUNT$ 件",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "popupHint": { "message": "動画・音声のあるページで Space を押すと、一時停止してコメントを記録します。" },
+  "popupStop": { "message": "終了して Markdown をダウンロード" },
+  "popupDiscard": { "message": "破棄して終了" },
+  "popupDiscardConfirm": { "message": "もう一度クリックで破棄" },
+  "noComment": { "message": "（コメントなし）" },
+  "overlayLabel": { "message": "コメントを記録" },
+  "overlayPlaceholder": { "message": "コメントを入力…" },
+  "overlayHint": { "message": "Enter: 保存して再開 ・ Shift+Enter: 改行 ・ Esc: キャンセル" },
+  "mdStarted": { "message": "開始" },
+  "mdEnded": { "message": "終了" },
+  "mdCount": { "message": "記録数" }
+}

@@ -70,26 +70,32 @@
     const root = overlayHost.attachShadow({ mode: "open" });
     root.innerHTML = `
       <style>
+        /* Creator Transformation Railcar palette (dark) */
         .box {
           position: fixed; left: 50%; bottom: 12%; transform: translateX(-50%);
           z-index: 2147483647; width: min(480px, calc(100vw - 32px));
-          background: #1e1f24; color: #f2f2f2; border-radius: 12px; padding: 14px;
+          background: #0f172a; color: #f8fafc; padding: 14px;
+          border: 1px solid #7c3aed; border-radius: 0.75rem;
           box-shadow: 0 8px 32px rgba(0,0,0,.45);
-          font: 14px/1.4 system-ui, -apple-system, "Hiragino Sans", sans-serif;
+          font: 14px/1.4 "Inter", system-ui, -apple-system, "Hiragino Sans", sans-serif;
         }
-        .time { font-weight: 600; color: #7cc4ff; margin-bottom: 8px; }
+        .time { font-weight: 600; color: #a78bfa; margin-bottom: 8px; }
         textarea {
           box-sizing: border-box; width: 100%; min-height: 72px; resize: vertical;
-          background: #2b2d34; color: inherit; border: 1px solid #444; border-radius: 8px;
+          background: #1e293b; color: inherit; border: 1px solid #334155; border-radius: 0.5rem;
           padding: 8px; font: inherit;
         }
-        .hint { margin-top: 6px; font-size: 12px; color: #a0a0a8; }
+        textarea:focus { outline: 2px solid #7c3aed; outline-offset: 0; border-color: transparent; }
+        .hint { margin-top: 6px; font-size: 12px; color: #94a3b8; }
       </style>
-      <div class="box" role="dialog" aria-label="Media Reaction Capture">
+      <div class="box" role="dialog">
         <div class="time"></div>
-        <textarea placeholder="コメントを入力…"></textarea>
-        <div class="hint">Enter: 保存して再開 ・ Shift+Enter: 改行 ・ Esc: キャンセル</div>
+        <textarea></textarea>
+        <div class="hint"></div>
       </div>`;
+    root.querySelector(".box").setAttribute("aria-label", mrcT("overlayLabel"));
+    root.querySelector("textarea").placeholder = mrcT("overlayPlaceholder");
+    root.querySelector(".hint").textContent = mrcT("overlayHint");
     root.querySelector(".time").textContent = `⏸ ${mrcFormatTime(time)}`;
     const textarea = root.querySelector("textarea");
 

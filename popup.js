@@ -1,12 +1,20 @@
 const $ = (id) => document.getElementById(id);
 
+function localize() {
+  document.documentElement.lang = chrome.i18n.getUILanguage();
+  for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = mrcT(el.dataset.i18n);
+  for (const el of document.querySelectorAll("[data-i18n-placeholder]")) {
+    el.placeholder = mrcT(el.dataset.i18nPlaceholder);
+  }
+}
+
 function render(session) {
   const active = Boolean(session?.active);
   $("idle").hidden = active;
   $("active").hidden = !active;
   if (!active) return;
 
-  $("count").textContent = session.entries.length;
+  $("status").textContent = mrcT("popupStatus", [String(session.entries.length)]);
   const list = $("entries");
   list.replaceChildren(
     ...session.entries.map((entry) => {
@@ -14,7 +22,7 @@ function render(session) {
       const t = document.createElement("span");
       t.className = "t";
       t.textContent = mrcFormatTime(entry.time);
-      li.append(t, entry.comment || "（コメントなし）");
+      li.append(t, entry.comment || mrcT("noComment"));
       return li;
     })
   );
@@ -34,10 +42,11 @@ function timestampUrl(url, seconds) {
 }
 
 function toMarkdown(session, endedAt) {
-  const lines = [`# ${session.title || "Media Reaction Capture"}`, ""];
-  lines.push(`- 開始: ${new Date(session.startedAt).toLocaleString()}`);
-  lines.push(`- 終了: ${endedAt.toLocaleString()}`);
-  lines.push(`- 記録数: ${session.entries.length}`);
+  const locale = chrome.i18n.getUILanguage();
+  const lines = [`# ${session.title || mrcT("extName")}`, ""];
+  lines.push(`- ${mrcT("mdStarted")}: ${new Date(session.startedAt).toLocaleString(locale)}`);
+  lines.push(`- ${mrcT("mdEnded")}: ${endedAt.toLocaleString(locale)}`);
+  lines.push(`- ${mrcT("mdCount")}: ${session.entries.length}`);
 
   // Group consecutive entries by page so a session can span several videos.
   let currentUrl = null;
@@ -47,7 +56,7 @@ function toMarkdown(session, endedAt) {
       lines.push("", `## [${entry.title || entry.url}](${entry.url})`, "");
     }
     const time = mrcFormatTime(entry.time);
-    const comment = (entry.comment || "（コメントなし）").replace(/\n/g, "  \n  ");
+    const comment = (entry.comment || mrcT("noComment")).replace(/\n/g, "  \n  ");
     const link = timestampUrl(entry.url, entry.time);
     lines.push(link === entry.url ? `- **${time}** ${comment}` : `- [**${time}**](${link}) ${comment}`);
   }
@@ -91,7 +100,7 @@ $("stop").addEventListener("click", async () => {
 $("discard").addEventListener("click", async (e) => {
   if (e.target.dataset.armed !== "1") {
     e.target.dataset.armed = "1";
-    e.target.textContent = "もう一度クリックで破棄";
+    e.target.textContent = mrcT("popupDiscardConfirm");
     return;
   }
   await chrome.storage.local.remove(MRC_STORAGE_KEY);
@@ -100,4 +109,5 @@ $("discard").addEventListener("click", async (e) => {
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes[MRC_STORAGE_KEY]) render(changes[MRC_STORAGE_KEY].newValue);
 });
+localize();
 getSession().then(render);
